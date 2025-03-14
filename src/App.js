@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import Auth from "./Auth";
-import Chat from "./Chat"; // Import Chat Component
+import Chat from "./Chat"; 
 import { auth } from "./firebaseconfig";
-import "./App.css"; // ✅ Import CSS
+import "./App.css"; 
 
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect("https://wechat-backend-v2.onrender.com");
 
 function App() {
     const [user, setUser] = useState(null);
