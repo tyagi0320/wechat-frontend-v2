@@ -7,7 +7,6 @@ function Chat({ socket, user }) {
     useEffect(() => {
         // Listen for incoming messages
         socket.on("receiveMessage", (message) => {
-            console.log("Received message:", message); // Debug log
             setMessages((prev) => [...prev, message]);
         });
 
@@ -19,7 +18,6 @@ function Chat({ socket, user }) {
 
         const newMessage = { sender: user.email, text: message };
         socket.emit("sendMessage", newMessage);
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
         setMessage("");
     };
 
