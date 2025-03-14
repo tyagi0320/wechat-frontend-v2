@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import Auth from "./Auth";
-import Chat from "./Chat"; 
+import Chat from "./Chat";
 import { auth } from "./firebaseconfig";
-import "./App.css"; 
+import "./App.css";
 
 const socket = io.connect("https://wechat-backend-v2.onrender.com");
 
@@ -19,18 +19,18 @@ function App() {
     const myVideoRef = useRef(null);
     const peerVideoRef = useRef(null);
     const connectionRef = useRef(null);
-    const ringtoneRef = useRef(new Audio("/ringtone.mp3"));
 
     useEffect(() => {
         // Request camera & mic permissions
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((currentStream) => {
                 setStream(currentStream);
-                if (myVideoRef.current){
-                  myVideoRef.current.srcObject = currentStream;
-                } 
-            }).catch((error) => console.error("Error accessing media devices:", error));
-        
+                if (myVideoRef.current) {
+                    myVideoRef.current.srcObject = currentStream;
+                }
+            })
+            .catch((error) => console.error("Error accessing media devices:", error));
+
         // Handle authentication state
         auth.onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
@@ -44,10 +44,11 @@ function App() {
             setIncomingCall(true);
             setCallerEmail(from);
             setCallerSignal(signal);
-            ringtoneRef.current.play(); // Play ringtone
         });
 
-        return () => socket.off("callUser");
+        return () => {
+            socket.off("callUser");
+        };
     }, []);
 
     const initiateCall = () => {
@@ -64,9 +65,9 @@ function App() {
 
         peer.on("stream", (peerStream) => {
             console.log("Receiving peer stream:", peerStream);
-          if (peerVideoRef.current) {
-        peerVideoRef.current.srcObject = peerStream;
-        }
+            if (peerVideoRef.current) {
+                peerVideoRef.current.srcObject = peerStream;
+            }
         });
 
         socket.on("callAccepted", (signal) => {
@@ -79,7 +80,6 @@ function App() {
 
     const answerCall = () => {
         setCallConnected(true);
-        ringtoneRef.current.pause(); // Stop ringtone when call is answered
 
         const peer = new Peer({ initiator: false, trickle: false, stream });
 
@@ -88,7 +88,9 @@ function App() {
         });
 
         peer.on("stream", (peerStream) => {
-            peerVideoRef.current.srcObject = peerStream;
+            if (peerVideoRef.current) {
+                peerVideoRef.current.srcObject = peerStream;
+            }
         });
 
         peer.signal(callerSignal);
@@ -117,9 +119,7 @@ function App() {
                             <p>My Video</p>
                         </div>
                         <div>
-                            {callConnected && (
-                                <video ref={peerVideoRef} autoPlay playsInline className="video" />
-                            )}
+                            {callConnected && <video ref={peerVideoRef} autoPlay playsInline className="video" />}
                             <p>{callConnected ? "Peer Video" : "No Call Yet"}</p>
                         </div>
                     </div>
