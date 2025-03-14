@@ -1,0 +1,170 @@
+/* General Styling */
+body {
+	background: linear-gradient(to right, #eef2f3, #ffffff); /* Light gradient */
+	font-family: "Arial", sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	color: #333;
+  }
+  
+  /* Main Container */
+  .container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	max-width: 900px;
+	padding: 20px;
+	text-align: center;
+	background: white;
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title */
+  .title {
+	color: #333;
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+  }
+  
+  /* Video Container */
+  .video-container {
+	display: flex;
+	gap: 20px;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-top: 2rem;
+  }
+  
+  .video {
+	width: 300px;
+	height: 200px;
+	border-radius: 12px;
+	border: 2px solid #ddd;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* User Details & Controls */
+  .myId {
+	background: #f8f9fa;
+	padding: 20px;
+	border-radius: 10px;
+	text-align: center;
+	margin: 20px 0;
+	width: 100%;
+	max-width: 500px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .myId input {
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	font-size: 1rem;
+  }
+  
+  /* Buttons */
+  .call-button {
+	text-align: center;
+	margin-top: 20px;
+  }
+  
+  button {
+	padding: 12px 18px;
+	margin: 10px;
+	border: none;
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: 0.3s;
+	font-weight: bold;
+  }
+  
+  button:hover {
+	transform: scale(1.05);
+  }
+  
+  .call-btn {
+	background-color: #28a745;
+	color: white;
+  }
+  
+  .answer-btn {
+	background-color: #007bff;
+	color: white;
+  }
+  
+  .end-call-btn {
+	background-color: #dc3545;
+	color: white;
+  }
+  
+  /* Caller Notification */
+  .caller {
+	text-align: center;
+	color: #555;
+	font-size: 1.2rem;
+	margin-top: 20px;
+	background: #f1f1f1;
+	padding: 15px;
+	border-radius: 8px;
+  }
+  
+  /* Chat Section */
+  .chat-container {
+	background: white;
+	border-radius: 12px;
+	padding: 20px;
+	width: 100%;
+	max-width: 600px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	margin-top: 20px;
+  }
+  
+  .chat-messages {
+	max-height: 300px;
+	overflow-y: auto;
+	padding: 10px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	background: #f9f9f9;
+  }
+  
+  .chat-input {
+	width: 100%;
+	padding: 10px;
+	margin-top: 10px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+  }
+  
+  /* Responsive Design */
+  @media screen and (max-width: 768px) {
+	.video-container {
+	  flex-direction: column;
+	}
+  
+	.video {
+	  width: 90%;
+	  height: auto;
+	}
+  
+	.myId {
+	  width: 90%;
+	}
+  
+	.chat-container {
+	  width: 90%;
+	}
+  }
+  
