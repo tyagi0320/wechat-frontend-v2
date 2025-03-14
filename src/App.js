@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
 import Peer from "simple-peer";
 import Auth from "./Auth";
-import Chat from "./Chat";
+import Chat from "./Chat"; 
 import { auth } from "./firebaseconfig";
-import "./App.css";
+import "./App.css"; 
 
 const socket = io.connect("https://wechat-backend-v2.onrender.com");
 
@@ -28,9 +28,8 @@ function App() {
                 if (myVideoRef.current) {
                     myVideoRef.current.srcObject = currentStream;
                 }
-            })
-            .catch((error) => console.error("Error accessing media devices:", error));
-
+            }).catch((error) => console.error("Error accessing media devices:", error));
+        
         // Handle authentication state
         auth.onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
@@ -67,6 +66,8 @@ function App() {
             console.log("Receiving peer stream:", peerStream);
             if (peerVideoRef.current) {
                 peerVideoRef.current.srcObject = peerStream;
+            } else {
+                console.error("peerVideoRef is not available");
             }
         });
 
@@ -88,8 +89,11 @@ function App() {
         });
 
         peer.on("stream", (peerStream) => {
+            console.log("Receiving peer stream:", peerStream);
             if (peerVideoRef.current) {
                 peerVideoRef.current.srcObject = peerStream;
+            } else {
+                console.error("peerVideoRef is not available");
             }
         });
 
@@ -119,7 +123,9 @@ function App() {
                             <p>My Video</p>
                         </div>
                         <div>
-                            {callConnected && <video ref={peerVideoRef} autoPlay playsInline className="video" />}
+                            {callConnected && (
+                                <video ref={peerVideoRef} autoPlay playsInline className="video" />
+                            )}
                             <p>{callConnected ? "Peer Video" : "No Call Yet"}</p>
                         </div>
                     </div>
