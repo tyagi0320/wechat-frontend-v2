@@ -26,9 +26,11 @@ function App() {
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((currentStream) => {
                 setStream(currentStream);
-                if (myVideoRef.current) myVideoRef.current.srcObject = currentStream;
-            });
-
+                if (myVideoRef.current){
+                  myVideoRef.current.srcObject = currentStream;
+                } 
+            }).catch((error) => console.error("Error accessing media devices:", error));
+        
         // Handle authentication state
         auth.onAuthStateChanged((firebaseUser) => {
             if (firebaseUser) {
@@ -61,7 +63,10 @@ function App() {
         });
 
         peer.on("stream", (peerStream) => {
-            peerVideoRef.current.srcObject = peerStream;
+            console.log("Receiving peer stream:", peerStream);
+          if (peerVideoRef.current) {
+        peerVideoRef.current.srcObject = peerStream;
+        }
         });
 
         socket.on("callAccepted", (signal) => {
