@@ -6,7 +6,7 @@ import Chat from "./Chat";
 import { auth } from "./firebaseconfig";
 import "./App.css"; 
 
-const socket = io.connect("https://wechat-backend-v2.onrender.com");
+const socket = io.connect("wss://wechat-backend-v2.onrender.com");
 
 function App() {
     const [user, setUser] = useState(null);
