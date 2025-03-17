@@ -88,14 +88,16 @@ function App() {
             socket.emit("answerCall", { signal: data, to: callerEmail });
         });
 
-        peer.on("stream", (peerStream) => {
-            console.log("Receiving peer stream:", peerStream);
-            if (peerVideoRef.current) {
-                peerVideoRef.current.srcObject = peerStream;
-            } else {
-                console.error("peerVideoRef is not available");
-            }
-        });
+       peer.on("stream", (peerStream) => {
+    console.log("✅ Receiving peer stream:", peerStream);
+    
+    if (peerVideoRef.current) {
+        console.log("✅ Assigning peer stream to video element");
+        peerVideoRef.current.srcObject = peerStream;
+    } else {
+        console.error("❌ peerVideoRef is not available");
+    }
+});
 
         peer.signal(callerSignal);
         connectionRef.current = peer;
